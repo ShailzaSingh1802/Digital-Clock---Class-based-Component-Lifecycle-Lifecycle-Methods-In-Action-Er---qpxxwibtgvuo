@@ -1,26 +1,40 @@
-import "../styles/App.css";
+import React, { useEffect } from 'react'
 
-import React from 'react'
-import { useState, useEffect } from 'react';
+import '../styles/App.css';
+
 const App = () => {
-  const[Time,setTime]=useState();
 
-  const today = new Date();
+  const [date,setDate] = React.useState()
 
-  const todaydate = (today.getFullYear() + '/' + (today.getMonth() + 1) + '/' + today.getDate());
+  useEffect(()=>{
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(new Date().toLocaleString());
-    }, 1000);
-    return () => clearInterval(interval);
-  });
+    setDate(new Date().toLocaleString())
+
+    const timerId = setInterval(()=>{
+
+      setDate(new Date().toLocaleString())
+
+    },1000)
+
+    return () => clearInterval(timerId)
+
+  },[])
+
   return (
+
     <div id="main">
-      <div className="date-time">
-      {Time}
-      </div>
+
+      <div className="date">{date}</div>
+
     </div>
+
   )
+
 }
+
+
+
+ 
+
 export default App;
+
